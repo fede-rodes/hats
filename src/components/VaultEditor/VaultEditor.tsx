@@ -59,6 +59,8 @@ const newVaultDescription: IVaultDescription = {
     }
 }
 
+const LAST_PAGE = 6
+
 export default function VaultEditor() {
     const { t } = useTranslation();
     const [vaultDescription, setVaultDescription] = useState<IVaultDescription>(newVaultDescription)
@@ -259,7 +261,7 @@ export default function VaultEditor() {
 
     // Pagination in mobile
     function nextPage() {
-        if (pageNumber >= 5) return
+        if (pageNumber >= LAST_PAGE) return
         setPageNumber(pageNumber + 1)
         window.scroll({
             top: 0,
@@ -397,12 +399,45 @@ export default function VaultEditor() {
 
                 </section>
 
-                <div className="vault-editor__divider desktop-only"></div>
-
+                {/* TODO:
+                  1. Max prize: said value is hardcoded in the description but should be passed
+                  as an argument to the description field. Otherwise, if the user changes the max
+                  prize value from the description, we'll get a miss-match on the VaultReview
+                  component.
+                  2. Validation: make sure all descriptions contain at least one character and
+                  probably don't exceed some predefine length.
+                  3. Translations: add translation keys and the associated values to translation
+                  files.
+                */}
                 <section className={classNames({ 'desktop-only': pageNumber !== 5 })}>
                     <div className="vault-editor__section">
                         <p className="vault-editor__section-title">
-                            6. {t("VaultEditor.review-vault.title")}
+                          6. {t("VaultEditor.severities")}
+                        </p>
+                        <div className="vault-editor__section-content">
+                          {vaultDescription.severities.map((severity) => (
+                            <div key={severity.name}>
+                              <label>{t(`VaultEditor.severity-${severity.name}`)}</label>
+                              <EditableContent
+                                name={`severity-${severity.name}`}
+                                // pastable
+                                colorable
+                                value={severity.description}
+                                onChange={onChange}
+                                placeholder={t("VaultEditor.severity-placeholder")}
+                            />
+                            </div>
+                          )).reverse()}
+                        </div>
+                    </div>
+                </section>
+
+                <div className="vault-editor__divider desktop-only"></div>
+
+                <section className={classNames({ 'desktop-only': pageNumber !== LAST_PAGE })}>
+                    <div className="vault-editor__section">
+                        <p className="vault-editor__section-title">
+                            7. {t("VaultEditor.review-vault.title")}
                         </p>
                         <div className="vault-editor__section-content">
                             <VaultReview vaultDescription={vaultDescription} />
@@ -439,7 +474,7 @@ export default function VaultEditor() {
                 } */}
 
                 <div className="vault-editor__next-preview">
-                    {pageNumber < 5 && (
+                    {pageNumber < LAST_PAGE && (
                         <div>
                             <button onClick={nextPage}>{t("VaultEditor.next")}</button>
                         </div>
