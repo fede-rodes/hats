@@ -259,13 +259,13 @@ export default function VaultEditor() {
         }
     }
 
-    function onSeverityChange(severityName: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    function onSeverityChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
       setVaultDescription(prev => {
         let newObject = { ...prev }
         setPath(newObject, "severities", prev.severities.map(severity =>
         ({
             ...severity,
-            description: severity.name === severityName ? e.target.value : severity.description,
+            description: severity.name === e.target.name ? e.target.value : severity.description,
         })))
         return newObject
       })
@@ -418,27 +418,25 @@ export default function VaultEditor() {
                   component.
                   2. Validation: make sure all description inputs contain at least one character
                   and probably don't exceed some predefine length.
-                  3. Translations: add translation keys and the associated values to translation
-                  files.
                   4. Bug?: on section 4 (Contracts-Covered) when the user unchecks any of the severities
                   the changes is not reflected in the state.
                 */}
                 <section className={classNames({ 'desktop-only': pageNumber !== 5 })}>
                     <div className="vault-editor__section">
                         <p className="vault-editor__section-title">
-                          6. {t("VaultEditor.severities")}
+                          6. {t("VaultEditor.severities-section-title")}
                         </p>
                         <div className="vault-editor__section-content">
                           {vaultDescription.severities.map((severity) => (
                             <div key={severity.name}>
-                              <label>{t(`VaultEditor.severity-${severity.name}`)}</label>
+                              <label>{t(`VaultEditor.severity-input-label-${severity.name}`)}</label>
                               <EditableContent
-                                name={`severity-${severity.name}`}
+                                name={severity.name}
                                 // pastable
                                 colorable
                                 value={severity.description}
-                                onChange={(e) => { onSeverityChange(severity.name, e) }}
-                                placeholder={t("VaultEditor.severity-placeholder")}
+                                onChange={onSeverityChange}
+                                placeholder={t("VaultEditor.severity-input-placeholder")}
                             />
                             </div>
                           )).reverse()}
