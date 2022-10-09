@@ -278,7 +278,7 @@ export default function VaultEditor() {
         window.scroll({
             top: 0,
             left: 0,
-            behavior: 'smooth'
+            // behavior: 'smooth'
         });
     }
 
@@ -288,7 +288,7 @@ export default function VaultEditor() {
         window.scroll({
             top: 0,
             left: 0,
-            behavior: 'smooth'
+            // behavior: 'smooth'
         });
     }
 
@@ -418,6 +418,8 @@ export default function VaultEditor() {
                   component.
                   2. Validation: make sure all description inputs contain at least one character
                   and probably don't exceed some predefine length.
+                  3. Reset description: add reset description button to undo any changes (you can
+                  always Crtl+z though)
                 */}
                 <section className={classNames({ 'desktop-only': pageNumber !== 5 })}>
                     <div className="vault-editor__section">
