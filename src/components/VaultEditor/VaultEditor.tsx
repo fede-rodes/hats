@@ -418,25 +418,23 @@ export default function VaultEditor() {
                   component.
                   2. Validation: make sure all description inputs contain at least one character
                   and probably don't exceed some predefine length.
-                  4. Bug?: on section 4 (Contracts-Covered) when the user unchecks any of the severities
-                  the changes is not reflected in the state.
                 */}
                 <section className={classNames({ 'desktop-only': pageNumber !== 5 })}>
                     <div className="vault-editor__section">
                         <p className="vault-editor__section-title">
-                          6. {t("VaultEditor.severities-section-title")}
+                          6. {t("VaultEditor.severities-section.title")}
                         </p>
                         <div className="vault-editor__section-content">
                           {vaultDescription.severities.map((severity) => (
                             <div key={severity.name}>
-                              <label>{t(`VaultEditor.severity-input-label-${severity.name}`)}</label>
+                              <label>{t(`VaultEditor.severities-section.input.label.${severity.name}`)}</label>
                               <EditableContent
                                 name={severity.name}
                                 // pastable
                                 colorable
                                 value={severity.description}
                                 onChange={onSeverityChange}
-                                placeholder={t("VaultEditor.severity-input-placeholder")}
+                                placeholder={t("VaultEditor.severities-section.input.placeholder")}
                             />
                             </div>
                           )).reverse()}
