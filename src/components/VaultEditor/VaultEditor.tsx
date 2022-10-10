@@ -259,6 +259,9 @@ export default function VaultEditor() {
         }
     }
 
+    // OBSERVATION: I would call this function `handleSeverityChange` instead given that this
+    // is an event handler. Usually, I use `on` for the event emiter. I keep calling it
+    // `onSeverityChange` for consistency reasons.
     function onSeverityChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
       setVaultDescription(prev => {
         let newObject = { ...prev }
@@ -418,8 +421,7 @@ export default function VaultEditor() {
                   component.
                   2. Validation: make sure all description inputs contain at least one character
                   and probably don't exceed some predefine length.
-                  3. Reset description: add reset description button to undo any changes (you can
-                  always Crtl+z though)
+                  3. Reset description: add reset description button to undo any changes.
                 */}
                 <section className={classNames({ 'desktop-only': pageNumber !== 5 })}>
                     <div className="vault-editor__section">
