@@ -361,15 +361,11 @@
       "signees": "SIGNEES",
       "severities-section": {
         "title": "Severities Description",
-        "input": {
-          "label": {
-            "low": "Low",
-            "medium": "Medium",
-            "high": "High",
-            "critical": "Critical"
-          },
-          "placeholder": "Severity description"
-        }
+        "input-low-label": "Low",
+        "input-medium-label": "Medium",
+        "input-high-label": "High",
+        "input-critical-label": "Critical",
+        "input-placeholder": "Severity description"
       },
       "save-button": "Save",
       "sign-submit": "Sign and submit",

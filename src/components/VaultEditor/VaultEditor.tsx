@@ -429,14 +429,14 @@ export default function VaultEditor() {
                         <div className="vault-editor__section-content">
                           {vaultDescription.severities.map((severity) => (
                             <div key={severity.name}>
-                              <label>{t(`VaultEditor.severities-section.input.label.${severity.name}`)}</label>
+                              <label>{t(`VaultEditor.severities-section.input-${severity.name}-label`)}</label>
                               <EditableContent
                                 name={severity.name}
                                 // pastable
                                 colorable
                                 value={severity.description}
                                 onChange={onSeverityChange}
-                                placeholder={t("VaultEditor.severities-section.input.placeholder")}
+                                placeholder={t(`VaultEditor.severities-section.input-placeholder`)}
                             />
                             </div>
                           )).reverse()}
